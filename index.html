@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs" data-theme="dark">
+<html lang="cs" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,16 +15,15 @@
             --bg-color: #f8f9fa;
             --bg-image: none;
             --text-color: #333;
-            --nav-bg: #ffffff;
+            --text-muted: #666;
             --sheet-bg: #ffffff;
             --lyrics-bg: #ffffff;
             --filter-sheet: none;
             --verse-num: #a41e22;
-            --btn-active: #a41e22;
-            --btn-text: #fff;
             --divider: #a41e22;
             --toggle-bg: rgba(255, 255, 255, 0.8);
             --toggle-border: #ccc;
+            --song-border: #ddd;
         }
 
         [data-theme="dark"] {
@@ -32,131 +31,106 @@
             --bg-color: #1a1a1a;
             --bg-image: url('https://www.farnostpolicka.cz/themes/fara/assets/images/bg_gothic.jpg');
             --text-color: #f0f0f0;
-            --nav-bg: rgba(0, 0, 0, 0.85);
-            --sheet-bg: rgba(20, 20, 20, 0.6);
+            --text-muted: #aaa;
+            --sheet-bg: rgba(20, 20, 20, 0.85);
             --lyrics-bg: rgba(0, 0, 0, 0.7);
             --filter-sheet: invert(1) sepia(1) saturate(50%) hue-rotate(5deg);
             --verse-num: #ffc107;
-            --btn-active: #ffc107;
-            --btn-text: #000;
             --divider: #ffc107;
             --toggle-bg: rgba(0, 0, 0, 0.6);
             --toggle-border: #555;
+            --song-border: #444;
         }
 
-        /* --- LAYOUT GRID --- */
         html, body {
-            height: 100dvh; /* Dynamic height for mobile */
             margin: 0;
-            overflow: hidden;
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-color);
             background-image: var(--bg-image);
+            background-attachment: fixed;
             background-repeat: repeat;
             color: var(--text-color);
+            scroll-behavior: smooth;
         }
-
-        body {
-            /* 2 Rows: Nav (auto height) + Content (Takes remaining space) */
-            display: grid;
-            grid-template-rows: auto minmax(0, 1fr); 
-        }
-
-        /* ROW 1: Navigation */
-        .nav-scroller {
-            background-color: var(--nav-bg);
-            padding: 15px 0;
-            padding-right: 60px; /* Space for the theme button */
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            z-index: 20;
-            border-bottom: 1px solid rgba(128,128,128,0.2);
-            position: relative; /* Needed for stacking context */
-        }
-        .nav-scroller::-webkit-scrollbar { display: none; }
-        
-        .nav-pills .nav-link {
-            color: #888; margin: 0 4px; border: 1px solid rgba(128, 128, 128, 0.3);
-            border-radius: 50px; padding: 8px 16px; font-size: 0.95rem;
-        }
-        .nav-pills .nav-link:first-child { margin-left: 15px; }
-        
-        .nav-pills .nav-link.active {
-            background-color: var(--btn-active); color: var(--btn-text);
-            border-color: var(--btn-active); font-weight: 600;
-        }
-
-        /* ROW 2: Main Content */
-        .tab-content {
-            height: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .tab-pane {
-            height: 100%;
-            display: none;
-            flex-direction: column; 
-        }
-        .tab-pane.active { display: flex !important; }
-
-        /* Sheet Music Area */
-        .sheet-music-container {
-            flex: 0 0 auto;
-            background-color: var(--sheet-bg);
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid rgba(128,128,128,0.2);
-            backdrop-filter: blur(2px);
-            z-index: 10;
-        }
-        .sheet-music-img {
-            max-height: 35vh; 
-            width: auto; max-width: 100%; object-fit: contain;
-            filter: var(--filter-sheet);
-        }
-
-        /* Lyrics Area */
-        .lyrics-container {
-            flex: 1 1 auto;
-            min-height: 0; /* Critical for scrolling */
-            overflow-y: auto;
-            background-color: var(--lyrics-bg);
-            padding: 20px; padding-bottom: 100px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .lyrics-text {
-            font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;
-        }
-        .song-title-in-body {
-            color: var(--primary-color); text-transform: uppercase;
-            font-weight: 700; margin-bottom: 10px; font-size: 1.3rem;
-        }
-        .divider-custom {
-            border-top: 3px solid var(--divider); width: 50px; margin: 10px auto 20px auto; opacity: 1;
-        }
-        .verse-num { color: var(--verse-num); font-weight: 800; margin-right: 8px; }
 
         /* FLOATING THEME TOGGLE */
         .btn-theme-toggle {
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            z-index: 1000; /* Stays on top of Nav */
-            
-            background: var(--toggle-bg);
-            border: 1px solid var(--toggle-border);
-            color: var(--text-color);
-            backdrop-filter: blur(4px);
-            
-            border-radius: 50%; 
-            width: 42px; height: 42px;
+            position: fixed;
+            top: 20px; right: 20px; z-index: 1000;
+            background: var(--toggle-bg); border: 1px solid var(--toggle-border);
+            color: var(--text-color); backdrop-filter: blur(4px);
+            border-radius: 50%; width: 45px; height: 45px;
             display: flex; align-items: center; justify-content: center; 
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
+
+        /* --- SONG SECTION LAYOUT --- */
+        .song-section {
+            border-bottom: 20px solid transparent;
+            position: relative;
+        }
+
+        /* 1. Sheet Music Header (Sticky) */
+        .sheet-music-container {
+            position: -webkit-sticky; position: sticky; top: 0;
+            background-color: var(--sheet-bg);
+            padding: 10px; text-align: center;
+            border-bottom: 1px solid var(--song-border);
+            backdrop-filter: blur(5px); z-index: 10;
+            box-shadow: 0 4px 6px -2px rgba(0,0,0,0.1);
+            transition: padding 0.3s ease;
+        }
+
+        .sheet-music-img {
+            /* Default Mobile Portrait View: Prioritize seeing lyrics below */
+            max-height: 30vh; 
+            width: auto; max-width: 100%; object-fit: contain;
+            filter: var(--filter-sheet); transition: filter 0.3s, max-height 0.3s ease;
+        }
+
+        /* 2. Lyrics Area */
+        .lyrics-container {
+            background-color: var(--lyrics-bg);
+            padding: 30px 20px 80px 20px;
+            min-height: 60vh; 
+        }
+
+        .lyrics-text {
+            font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin: 0 auto;
+        }
+
+        /* --- RESPONSIVE TWEAKS FOR WIDER SCREENS --- */
+        /* When screen is wider than a portrait phone (e.g. landscape phone, tablet, laptop) */
+        @media (min-width: 576px) {
+            .sheet-music-container {
+                padding: 20px; /* More breathing room */
+            }
+            
+            .sheet-music-img {
+                /* THE FIX: Allow music to be much taller.
+                   Because it is object-fit: contain, allowing height allows width to expand.
+                   60vh is the compromise: music gets big, but leaves 40% screen height for lyrics. */
+                max-height: 60vh;
+            }
+
+            .lyrics-container {
+                 /* Ensure the lyrics section is at least tall enough to fill the rest of the screen */
+                min-height: 40vh;
+            }
+            
+            .lyrics-text {
+                max-width: 800px; /* Allow lyrics to be wider on big screens */
+            }
+        }
+
+
+        /* Typography styling */
+        .song-title { color: var(--primary-color); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; font-size: 1.4rem; }
+        .divider-custom { border-top: 3px solid var(--divider); width: 50px; margin: 15px auto 25px auto; opacity: 1; }
+        .verse-num { color: var(--verse-num); font-weight: 800; margin-right: 8px; }
+        .chorus { font-weight: bold; }
+        .refrain-marker { color: var(--text-muted); font-style: italic; margin-top: 15px; margin-bottom: 25px; }
+
     </style>
 </head>
 <body>
@@ -165,107 +139,134 @@
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
 
-    <div class="nav-scroller">
-        <ul class="nav nav-pills d-inline-flex" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="song1-tab" data-bs-toggle="pill" data-bs-target="#song1" type="button" role="tab">Narodil se Kristus Pán</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="song2-tab" data-bs-toggle="pill" data-bs-target="#song2" type="button" role="tab">Tichá Noc</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="song4-tab" data-bs-toggle="pill" data-bs-target="#song4" type="button" role="tab">Vítej, Jezulátko</button>
-            </li>
-        </ul>
-    </div>
-
-    <div class="tab-content" id="pills-tabContent">
+    <section class="song-section" id="song1">
+        <div class="sheet-music-container">
+            <img src="vitej.svg" alt="Noty" class="sheet-music-img">
+        </div>
         
-        <div class="tab-pane fade show active" id="song1" role="tabpanel">
-            <div class="sheet-music-container">
-                <img src="narodil.svg" alt="Noty" class="sheet-music-img">
-            </div>
-            <div class="lyrics-container">
-                <div class="lyrics-text text-center">
-                    <h2 class="song-title-in-body">Narodil se Kristus Pán</h2>
-                    <hr class="divider-custom">
-                    <p><span class="verse-num">1.</span> Narodil se Kristus Pán,<br>
-                    veselme se,<br>
-                    z růže kvítek vykvet nám,<br>
-                    radujme se.<br>
-                    <strong>Z života čistého,<br>
-                    z rodu královského,<br>
-                    nám, nám, narodil se!</strong></p>
-                    
-                    <p><span class="verse-num">2.</span> Jenž prorokován jest,<br>
-                    veselme se,<br>
-                    ten na svět poslán jest,<br>
-                    radujme se.<br>
-                    <strong>Z života čistého...</strong></p>
-                    
-                    <br><br><br>
-                </div>
-            </div>
-        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-text text-center">
+                <h2 class="song-title">1. Vítej, narozené Jezulátko</h2>
+                <hr class="divider-custom">
+                
+                <p class="chorus">
+                    <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
+                    vítej, Slovo Boží, pacholátko.
+                </p>
 
-        <div class="tab-pane fade" id="song2" role="tabpanel">
-            <div class="sheet-music-container">
-                <img src="tichanoc.svg" alt="Noty" class="sheet-music-img">
-            </div>
-            <div class="lyrics-container">
-                <div class="lyrics-text text-center">
-                    <h2 class="song-title-in-body">Tichá noc</h2>
-                    <hr class="divider-custom">
-                    <p><span class="verse-num">1.</span> Tichá noc, svatá noc!<br>
-                    Jala lid v blahý klid.<br>
-                    Dvé jen srdcí tu v betlémské záři<br>
-                    usmívá se se zjasnělou tváří<br>
-                    u Jezulátka tam,<br>
-                    u Jezulátka tam.</p>
-                </div>
+                <p>
+                    <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
+                    nás hříšné objevila?<br>
+                    Ztracené ve stínu, zlomené ve smrti,<br>
+                    Synu Boží, dík za tvé oběti!
+                </p>
+
+                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+
+                <p>
+                    <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
+                    roucho ti vybělí. Kdo však jej obleče?<br>
+                    Přichází hvězda tvá, zaklepe u dveří,<br>
+                    šťastný, kdo všimne si, otevře, uvěří.
+                </p>
+                
+                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+
+                <p>
+                    <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
+                    ten obraz má už teď jizvy na rukou.<br>
+                    Jizvy na rukou, rány od spasení,<br>
+                    tak Bůh miloval svoje stvoření!
+                </p>
             </div>
         </div>
+    </section>
 
-        <div class="tab-pane fade" id="song4" role="tabpanel">
-            <div class="sheet-music-container">
-                <img src="vitej.svg" alt="Noty" class="sheet-music-img">
-            </div>
-            
-            <div class="lyrics-container">
-                <div class="lyrics-text text-center">
-                    <h2 class="song-title-in-body">Vítej, narozené Jezulátko</h2>
-                    <hr class="divider-custom">
-                    
-                    <p><span class="verse-num">R:</span> <strong>Vítej, narozené Jezulátko,<br>
-                        vítej, Slovo Boží, pacholátko.</strong>
-                    </p>
+    <section class="song-section" id="song2">
+        <div class="sheet-music-container">
+            <img src="vitej.svg" alt="Noty" class="sheet-music-img">
+        </div>
+        
+        <div class="lyrics-container">
+            <div class="lyrics-text text-center">
+                <h2 class="song-title">2. Vítej, narozené Jezulátko</h2>
+                <hr class="divider-custom">
+                
+                <p class="chorus">
+                    <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
+                    vítej, Slovo Boží, pacholátko.
+                </p>
 
-                    <p><span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
-                        nás hříšné objevila?<br>
-                        Ztracené ve stínu, zlomené ve smrti,<br>
-                        Synu Boží, dík za tvé oběti!
-                    </p>
-                    
-                    <p class="text-muted"><span class="verse-num">R:</span> <em>Vítej, narozené Jezulátko...</em></p>
+                <p>
+                    <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
+                    nás hříšné objevila?<br>
+                    Ztracené ve stínu, zlomené ve smrti,<br>
+                    Synu Boží, dík za tvé oběti!
+                </p>
+                
+                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
 
-                    <p><span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
-                        roucho ti vybělí. Kdo však jej obleče?<br>
-                        Přichází hvězda tvá, zaklepe u dveří,<br>
-                        šťastný, kdo všimne si, otevře, uvěří.
-                    </p>
-                    
-                    <p class="text-muted"><span class="verse-num">R:</span> <em>Vítej, narozené Jezulátko...</em></p>
+                <p>
+                    <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
+                    roucho ti vybělí. Kdo však jej obleče?<br>
+                    Přichází hvězda tvá, zaklepe u dveří,<br>
+                    šťastný, kdo všimne si, otevře, uvěří.
+                </p>
+                
+                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
 
-                    <p><span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
-                        ten obraz má už teď jizvy na rukou.<br>
-                        Jizvy na rukou, rány od spasení,<br>
-                        tak Bůh miloval svoje stvoření!
-                    </p>
-                </div>
+                <p>
+                    <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
+                    ten obraz má už teď jizvy na rukou.<br>
+                    Jizvy na rukou, rány od spasení,<br>
+                    tak Bůh miloval svoje stvoření!
+                </p>
             </div>
         </div>
+    </section>
 
-    </div>
+    <section class="song-section" id="song3">
+        <div class="sheet-music-container">
+            <img src="vitej.svg" alt="Noty" class="sheet-music-img">
+        </div>
+        
+        <div class="lyrics-container">
+            <div class="lyrics-text text-center">
+                <h2 class="song-title">3. Vítej, narozené Jezulátko</h2>
+                <hr class="divider-custom">
+                
+                <p class="chorus">
+                    <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
+                    vítej, Slovo Boží, pacholátko.
+                </p>
+
+                <p>
+                    <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
+                    nás hříšné objevila?<br>
+                    Ztracené ve stínu, zlomené ve smrti,<br>
+                    Synu Boží, dík za tvé oběti!
+                </p>
+                
+                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+
+                <p>
+                    <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
+                    roucho ti vybělí. Kdo však jej obleče?<br>
+                    Přichází hvězda tvá, zaklepe u dveří,<br>
+                    šťastný, kdo všimne si, otevře, uvěří.
+                </p>
+                
+                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+
+                <p>
+                    <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
+                    ten obraz má už teď jizvy na rukou.<br>
+                    Jizvy na rukou, rány od spasení,<br>
+                    tak Bůh miloval svoje stvoření!
+                </p>
+            </div>
+        </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
