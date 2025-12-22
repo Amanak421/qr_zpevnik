@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs" data-theme="light">
+<html lang="cs" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -21,7 +21,7 @@
             --filter-sheet: none;
             --verse-num: #a41e22;
             --divider: #a41e22;
-            --toggle-bg: rgba(255, 255, 255, 0.8);
+            --toggle-bg: rgba(255, 255, 255, 0.9);
             --toggle-border: #ccc;
             --song-border: #ddd;
         }
@@ -32,12 +32,12 @@
             --bg-image: url('https://www.farnostpolicka.cz/themes/fara/assets/images/bg_gothic.jpg');
             --text-color: #f0f0f0;
             --text-muted: #aaa;
-            --sheet-bg: rgba(20, 20, 20, 0.85);
+            --sheet-bg: rgba(20, 20, 20, 0.9);
             --lyrics-bg: rgba(0, 0, 0, 0.7);
             --filter-sheet: invert(1) sepia(1) saturate(50%) hue-rotate(5deg);
             --verse-num: #ffc107;
             --divider: #ffc107;
-            --toggle-bg: rgba(0, 0, 0, 0.6);
+            --toggle-bg: rgba(0, 0, 0, 0.8);
             --toggle-border: #555;
             --song-border: #444;
         }
@@ -53,15 +53,23 @@
             scroll-behavior: smooth;
         }
 
-        /* FLOATING THEME TOGGLE */
+        /* --- THEME TOGGLE (BOTTOM LEFT) --- */
         .btn-theme-toggle {
             position: fixed;
-            top: 20px; right: 20px; z-index: 1000;
-            background: var(--toggle-bg); border: 1px solid var(--toggle-border);
-            color: var(--text-color); backdrop-filter: blur(4px);
-            border-radius: 50%; width: 45px; height: 45px;
+            bottom: 25px; /* Moved to bottom */
+            left: 25px;   /* Moved to left */
+            z-index: 1000;
+            
+            background: var(--toggle-bg);
+            border: 1px solid var(--toggle-border);
+            color: var(--text-color);
+            backdrop-filter: blur(4px);
+            
+            border-radius: 50%; 
+            width: 45px; height: 45px;
             display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         /* --- SONG SECTION LAYOUT --- */
@@ -70,61 +78,67 @@
             position: relative;
         }
 
-        /* 1. Sheet Music Header (Sticky) */
+        /* 1. DEFAULT (PORTRAIT): STICKY HEADER */
         .sheet-music-container {
-            position: -webkit-sticky; position: sticky; top: 0;
+            position: -webkit-sticky; 
+            position: sticky; 
+            top: 0;
+            
             background-color: var(--sheet-bg);
-            padding: 10px; text-align: center;
+            padding: 10px; 
+            text-align: center;
             border-bottom: 1px solid var(--song-border);
-            backdrop-filter: blur(5px); z-index: 10;
+            backdrop-filter: blur(5px); 
+            z-index: 10;
             box-shadow: 0 4px 6px -2px rgba(0,0,0,0.1);
-            transition: padding 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .sheet-music-img {
-            /* Default Mobile Portrait View: Prioritize seeing lyrics below */
-            max-height: 30vh; 
-            width: auto; max-width: 100%; object-fit: contain;
-            filter: var(--filter-sheet); transition: filter 0.3s, max-height 0.3s ease;
+            max-height: 50vh; /* Keeps it small so lyrics fit */
+            width: auto; 
+            max-width: 100%; 
+            object-fit: contain;
+            filter: var(--filter-sheet); 
+            transition: filter 0.3s;
         }
 
-        /* 2. Lyrics Area */
         .lyrics-container {
             background-color: var(--lyrics-bg);
             padding: 30px 20px 80px 20px;
             min-height: 60vh; 
         }
 
-        .lyrics-text {
-            font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin: 0 auto;
-        }
-
-        /* --- RESPONSIVE TWEAKS FOR WIDER SCREENS --- */
-        /* When screen is wider than a portrait phone (e.g. landscape phone, tablet, laptop) */
-        @media (min-width: 576px) {
-            .sheet-music-container {
-                padding: 20px; /* More breathing room */
-            }
+        /* 2. LANDSCAPE OVERRIDE (WIDE SCREEN) */
+        /* Detect if screen is wider than it is tall (Landscape) */
+        @media (orientation: landscape) {
             
+            /* Remove Sticky behavior */
+            .sheet-music-container {
+                position: relative; /* No longer sticky */
+                top: auto;
+                background-color: transparent; /* Blend in */
+                box-shadow: none;
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            /* Make image big and wide */
             .sheet-music-img {
-                /* THE FIX: Allow music to be much taller.
-                   Because it is object-fit: contain, allowing height allows width to expand.
-                   60vh is the compromise: music gets big, but leaves 40% screen height for lyrics. */
-                max-height: 60vh;
+                max-height: none; /* Remove height limit */
+                width: 100%;      /* Fill width */
+                max-width: 900px; /* Don't get crazy on desktop */
+                margin-top: 10px;
             }
 
             .lyrics-container {
-                 /* Ensure the lyrics section is at least tall enough to fill the rest of the screen */
-                min-height: 40vh;
-            }
-            
-            .lyrics-text {
-                max-width: 800px; /* Allow lyrics to be wider on big screens */
+                /* Reduce top padding since music isn't floating anymore */
+                padding-top: 10px; 
             }
         }
 
-
         /* Typography styling */
+        .lyrics-text { font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin: 0 auto; }
         .song-title { color: var(--primary-color); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; font-size: 1.4rem; }
         .divider-custom { border-top: 3px solid var(--divider); width: 50px; margin: 15px auto 25px auto; opacity: 1; }
         .verse-num { color: var(--verse-num); font-weight: 800; margin-right: 8px; }
@@ -212,15 +226,6 @@
                     Přichází hvězda tvá, zaklepe u dveří,<br>
                     šťastný, kdo všimne si, otevře, uvěří.
                 </p>
-                
-                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
-
-                <p>
-                    <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
-                    ten obraz má už teď jizvy na rukou.<br>
-                    Jizvy na rukou, rány od spasení,<br>
-                    tak Bůh miloval svoje stvoření!
-                </p>
             </div>
         </div>
     </section>
@@ -248,16 +253,7 @@
                 </p>
                 
                 <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
-
-                <p>
-                    <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
-                    roucho ti vybělí. Kdo však jej obleče?<br>
-                    Přichází hvězda tvá, zaklepe u dveří,<br>
-                    šťastný, kdo všimne si, otevře, uvěří.
-                </p>
                 
-                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
-
                 <p>
                     <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
                     ten obraz má už teď jizvy na rukou.<br>
