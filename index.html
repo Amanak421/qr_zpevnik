@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs" data-theme="dark">
+<html lang="cs" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -56,8 +56,8 @@
         /* --- THEME TOGGLE (BOTTOM LEFT) --- */
         .btn-theme-toggle {
             position: fixed;
-            bottom: 25px; /* Moved to bottom */
-            left: 25px;   /* Moved to left */
+            bottom: 25px;
+            left: 25px;
             z-index: 1000;
             
             background: var(--toggle-bg);
@@ -95,7 +95,7 @@
         }
 
         .sheet-music-img {
-            max-height: 50vh; /* Keeps it small so lyrics fit */
+            max-height: 50vh;
             width: auto; 
             max-width: 100%; 
             object-fit: contain;
@@ -109,41 +109,70 @@
             min-height: 60vh; 
         }
 
-        /* 2. LANDSCAPE OVERRIDE (WIDE SCREEN) */
-        /* Detect if screen is wider than it is tall (Landscape) */
+        /* 2. LANDSCAPE OVERRIDE */
         @media (orientation: landscape) {
-            
-            /* Remove Sticky behavior */
             .sheet-music-container {
-                position: relative; /* No longer sticky */
+                position: relative; 
                 top: auto;
-                background-color: transparent; /* Blend in */
+                background-color: transparent; 
                 box-shadow: none;
                 border-bottom: none;
                 padding-bottom: 0;
             }
 
-            /* Make image big and wide */
             .sheet-music-img {
-                max-height: none; /* Remove height limit */
-                width: 100%;      /* Fill width */
-                max-width: 900px; /* Don't get crazy on desktop */
+                max-height: none; 
+                width: 100%;      
+                max-width: 900px; 
                 margin-top: 10px;
             }
 
             .lyrics-container {
-                /* Reduce top padding since music isn't floating anymore */
                 padding-top: 10px; 
             }
         }
 
-        /* Typography styling */
-        .lyrics-text { font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin: 0 auto; }
-        .song-title { color: var(--primary-color); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; font-size: 1.4rem; }
-        .divider-custom { border-top: 3px solid var(--divider); width: 50px; margin: 15px auto 25px auto; opacity: 1; }
-        .verse-num { color: var(--verse-num); font-weight: 800; margin-right: 8px; }
-        .chorus { font-weight: bold; }
-        .refrain-marker { color: var(--text-muted); font-style: italic; margin-top: 15px; margin-bottom: 25px; }
+        /* --- TYPOGRAPHY --- */
+        .lyrics-text {
+            font-size: 1.25rem; 
+            line-height: 1.7; 
+            max-width: 600px; 
+            margin: 0 auto;
+            text-align: left; /* Aligns text to the left */
+        }
+        
+        .song-title { 
+            color: var(--primary-color); 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            margin-bottom: 10px; 
+            font-size: 1.4rem;
+            text-align: center; /* Keep title centered for balance */
+        }
+        
+        .divider-custom { 
+            border-top: 3px solid var(--divider); 
+            width: 50px; 
+            margin: 15px auto 25px auto; 
+            opacity: 1; 
+        }
+        
+        .verse-num { 
+            color: var(--verse-num); 
+            font-weight: 800; 
+            margin-right: 8px; 
+        }
+        
+        .chorus { 
+            font-weight: bold; 
+        }
+        
+        .refrain-marker { 
+            color: var(--text-muted); 
+            font-style: italic; 
+            margin-top: 15px; 
+            margin-bottom: 25px; 
+        }
 
     </style>
 </head>
@@ -159,7 +188,7 @@
         </div>
         
         <div class="lyrics-container">
-            <div class="lyrics-text text-center">
+            <div class="lyrics-text">
                 <h2 class="song-title">1. Vítej, narozené Jezulátko</h2>
                 <hr class="divider-custom">
                 
@@ -202,7 +231,7 @@
         </div>
         
         <div class="lyrics-container">
-            <div class="lyrics-text text-center">
+            <div class="lyrics-text">
                 <h2 class="song-title">2. Vítej, narozené Jezulátko</h2>
                 <hr class="divider-custom">
                 
@@ -236,7 +265,7 @@
         </div>
         
         <div class="lyrics-container">
-            <div class="lyrics-text text-center">
+            <div class="lyrics-text">
                 <h2 class="song-title">3. Vítej, narozené Jezulátko</h2>
                 <hr class="divider-custom">
                 
