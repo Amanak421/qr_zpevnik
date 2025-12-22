@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vánoční Zpěvník</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --highlight-yellow: #ffc107;
+            --bg-texture: url('https://www.farnostpolicka.cz/themes/fara/assets/images/bg_gothic.jpg');
+            --glass-dark: rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: var(--bg-texture);
+            background-repeat: repeat;
+            background-size: auto;
+            color: #f0f0f0;
+            height: 100vh;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        /* Navigation Menu */
+        .nav-scroller {
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 15px 0;
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            z-index: 20;
+        }
+        
+        .nav-scroller::-webkit-scrollbar { display: none; }
+
+        .nav-pills .nav-link {
+            color: #ccc;
+            margin: 0 4px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-pills .nav-link:first-child { margin-left: 15px; }
+        .nav-pills .nav-link:last-child { margin-right: 15px; }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--highlight-yellow);
+            color: #000;
+            border-color: var(--highlight-yellow);
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        /* Content Layout */
+        .tab-content {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tab-pane {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sheet Music Container */
+        .sheet-music-container {
+            background-color: rgba(20, 20, 20, 0.6); /* Slightly dark backing */
+            padding: 10px;
+            text-align: center;
+            z-index: 10;
+            flex-shrink: 0;
+            border-bottom: 1px solid #444;
+            backdrop-filter: blur(2px);
+        }
+
+        /* SVG/Image Styling 
+           The 'filter' property here is key. It inverts the colors 
+           (Black notes -> White notes) and adjusts the hue to match the yellow theme slightly.
+        */
+        .sheet-music-img {
+            max-height: 35vh; /* Keep image within top 35% of screen */
+            width: auto;
+            max-width: 100%;
+            
+            /* THIS TRICK MAKES BLACK NOTES WHITE */
+            filter: invert(1) sepia(1) saturate(50%) hue-rotate(5deg);
+            
+            /* Ensures SVG scales nicely */
+            object-fit: contain; 
+        }
+
+        /* Lyrics Styling */
+        .lyrics-container {
+            overflow-y: auto;
+            padding: 25px;
+            padding-bottom: 100px;
+            flex-grow: 1;
+            background-color: var(--glass-dark);
+        }
+
+        .lyrics-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #eee;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .song-title-in-body {
+            color: var(--highlight-yellow);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .divider-custom {
+            border-top: 3px solid var(--highlight-yellow);
+            width: 50px;
+            margin: 15px auto 25px auto;
+        }
+        
+        .verse-num {
+            color: var(--highlight-yellow);
+            font-weight: 800;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-scroller">
+        <ul class="nav nav-pills d-inline-flex" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="song1-tab" data-bs-toggle="pill" data-bs-target="#song1" type="button" role="tab">Narodil se Kristus Pán</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="song2-tab" data-bs-toggle="pill" data-bs-target="#song2" type="button" role="tab">Tichá Noc</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+        
+        <div class="tab-pane fade show active" id="song1" role="tabpanel">
+            <div class="sheet-music-container">
+                <img src="vitej.svg" alt="Noty - Vítej, narozené Jezulátko" class="sheet-music-img">
+            </div>
+            
+            <div class="lyrics-container">
+                <div class="lyrics-text text-center">
+                    <h2 class="song-title-in-body">Vítej, narozené Jezulátko</h2>
+                    <hr class="divider-custom">
+                    
+                    <p class="text-white fw-bold">
+                        <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
+                        vítej, Slovo Boží, pacholátko.
+                    </p>
+
+                    <p>
+                        <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
+                        nás hříšné objevila?<br>
+                        Ztracené ve stínu, zlomené ve smrti,<br>
+                        Synu Boží, dík za tvé oběti!
+                    </p>
+
+                    <p class="text-white-50">
+                        <span class="verse-num">R:</span> <em>Vítej, narozené Jezulátko...</em>
+                    </p>
+
+                    <p>
+                        <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
+                        roucho ti vybělí. Kdo však jej obleče?<br>
+                        Přichází hvězda tvá, zaklepe u dveří,<br>
+                        šťastný, kdo všimne si, otevře, uvěří.
+                    </p>
+                    
+                    <p class="text-white-50">
+                        <span class="verse-num">R:</span> <em>Vítej, narozené Jezulátko...</em>
+                    </p>
+
+                    <p>
+                        <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
+                        ten obraz má už teď jizvy na rukou.<br>
+                        Jizvy na rukou, rány od spasení,<br>
+                        tak Bůh miloval svoje stvoření!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="song2" role="tabpanel">
+            <div class="sheet-music-container">
+                 <img src="tichanoc.svg" alt="Noty - Tichá noc" class="sheet-music-img">
+            </div>
+            <div class="lyrics-container">
+                <div class="lyrics-text text-center">
+                    <h2 class="song-title-in-body">Tichá noc</h2>
+                    <hr class="divider-custom">
+                    <p><span class="verse-num">1.</span> Tichá noc, svatá noc,<br>jala lid v blahý klid...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
