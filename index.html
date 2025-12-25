@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs" data-theme="light">
+<html lang="cs" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,6 +12,7 @@
         /* --- THEME VARIABLES --- */
         :root {
             --primary-color: #a41e22;
+            --secondary-color: #8a191d;
             --bg-color: #f8f9fa;
             --bg-image: none;
             --text-color: #333;
@@ -24,10 +25,13 @@
             --toggle-bg: rgba(255, 255, 255, 0.9);
             --toggle-border: #ccc;
             --song-border: #ddd;
+            --tag-bg: #e9ecef;
+            --tag-text: #555;
         }
 
         [data-theme="dark"] {
             --primary-color: #ffc107;
+            --secondary-color: #cc9a06;
             --bg-color: #1a1a1a;
             --bg-image: url('https://www.farnostpolicka.cz/themes/fara/assets/images/bg_gothic.jpg');
             --text-color: #f0f0f0;
@@ -40,6 +44,8 @@
             --toggle-bg: rgba(0, 0, 0, 0.8);
             --toggle-border: #555;
             --song-border: #444;
+            --tag-bg: rgba(255, 193, 7, 0.2);
+            --tag-text: #ffc107;
         }
 
         html, body {
@@ -59,12 +65,10 @@
             bottom: 25px;
             left: 25px;
             z-index: 1000;
-            
             background: var(--toggle-bg);
             border: 1px solid var(--toggle-border);
             color: var(--text-color);
             backdrop-filter: blur(4px);
-            
             border-radius: 50%; 
             width: 45px; height: 45px;
             display: flex; align-items: center; justify-content: center; 
@@ -78,12 +82,11 @@
             position: relative;
         }
 
-        /* 1. DEFAULT (PORTRAIT): STICKY HEADER */
+        /* PORTRAIT: STICKY HEADER */
         .sheet-music-container {
             position: -webkit-sticky; 
             position: sticky; 
             top: 0;
-            
             background-color: var(--sheet-bg);
             padding: 10px; 
             text-align: center;
@@ -109,70 +112,62 @@
             min-height: 60vh; 
         }
 
-        /* 2. LANDSCAPE OVERRIDE */
+        /* LANDSCAPE OVERRIDE */
         @media (orientation: landscape) {
             .sheet-music-container {
-                position: relative; 
-                top: auto;
-                background-color: transparent; 
-                box-shadow: none;
-                border-bottom: none;
+                position: relative; top: auto;
+                background-color: var(--sheet-bg); 
+                box-shadow: none; border-bottom: none;
                 padding-bottom: 0;
             }
-
             .sheet-music-img {
-                max-height: none; 
-                width: 100%;      
-                max-width: 900px; 
-                margin-top: 10px;
+                max-height: none; width: 100%; max-width: 900px; margin-top: 10px;
             }
-
-            .lyrics-container {
-                padding-top: 10px; 
-            }
+            .lyrics-container { padding-top: 10px; }
         }
 
         /* --- TYPOGRAPHY --- */
         .lyrics-text {
-            font-size: 1.25rem; 
-            line-height: 1.7; 
-            max-width: 600px; 
-            margin: 0 auto;
-            text-align: left; /* Aligns text to the left */
+            font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin: 0 auto; text-align: left;
         }
         
+        /* Song Header Group */
+        .song-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .liturgical-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            margin-bottom: 8px;
+        }
+
         .song-title { 
             color: var(--primary-color); 
             text-transform: uppercase; 
             font-weight: 700; 
-            margin-bottom: 10px; 
-            font-size: 1.4rem;
-            text-align: center; /* Keep title centered for balance */
+            margin: 0;
+            font-size: 1.5rem;
         }
         
         .divider-custom { 
-            border-top: 3px solid var(--divider); 
-            width: 50px; 
-            margin: 15px auto 25px auto; 
-            opacity: 1; 
+            border-top: 3px solid var(--divider); width: 50px; margin: 15px auto 0 auto; opacity: 1; 
         }
         
-        .verse-num { 
-            color: var(--verse-num); 
-            font-weight: 800; 
-            margin-right: 8px; 
-        }
+        .verse-num { color: var(--verse-num); font-weight: 800; margin-right: 8px; }
+        .chorus { font-weight: bold; }
+        .refrain-marker { color: var(--text-muted); font-style: italic; margin-top: 15px; margin-bottom: 25px; }
         
-        .chorus { 
-            font-weight: bold; 
-        }
-        
-        .refrain-marker { 
-            color: var(--text-muted); 
-            font-style: italic; 
-            margin-top: 15px; 
-            margin-bottom: 25px; 
-        }
+        /* Minor tweak for sub-verses */
+        .lyrics-text p { margin-bottom: 1.2rem; }
 
     </style>
 </head>
@@ -182,113 +177,214 @@
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
 
-    <section class="song-section" id="song1">
+    <section class="song-section" id="uvod">
         <div class="sheet-music-container">
-            <img src="vitej.svg" alt="Noty" class="sheet-music-img">
+            <img src="vitej.svg" alt="Noty - Vítej narozené" class="sheet-music-img">
         </div>
-        
         <div class="lyrics-container">
             <div class="lyrics-text">
-                <h2 class="song-title">1. Vítej, narozené Jezulátko</h2>
-                <hr class="divider-custom">
+                <div class="song-header">
+                    <span class="liturgical-tag">Závěr</span>
+                    <h2 class="song-title">Vítej, narozené Jezulátko</h2>
+                    <hr class="divider-custom">
+                </div>
+
+                <p><span class="verse-num">R:</span> <span class="chorus">Vítej, narozené Jezulátko,<br>
+                vítej, Slovo Boží, pacholátko.</span></p>
+
+                <p><span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
+                nás hříšné objevila?<br>
+                Ztracené ve stínu, zlomené ve smrti,<br>
+                Synu Boží, dík za tvé oběti!</p>
                 
-                <p class="chorus">
-                    <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
-                    vítej, Slovo Boží, pacholátko.
-                </p>
+                <p class="refrain-marker">R: Vítej, narozené Jezulátko...</p>
 
-                <p>
-                    <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
-                    nás hříšné objevila?<br>
-                    Ztracené ve stínu, zlomené ve smrti,<br>
-                    Synu Boží, dík za tvé oběti!
-                </p>
-
-                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
-
-                <p>
-                    <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
-                    roucho ti vybělí. Kdo však jej obleče?<br>
-                    Přichází hvězda tvá, zaklepe u dveří,<br>
-                    šťastný, kdo všimne si, otevře, uvěří.
-                </p>
+                <p><span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
+                roucho ti vybělí. Kdo však jej obleče?<br>
+                Přichází hvězda tvá, zaklepe u dveří,<br>
+                šťastný, kdo všimne si, otevře, uvěří.</p>
                 
-                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+                <p class="refrain-marker">R: Vítej, narozené Jezulátko...</p>
 
-                <p>
-                    <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
-                    ten obraz má už teď jizvy na rukou.<br>
-                    Jizvy na rukou, rány od spasení,<br>
-                    tak Bůh miloval svoje stvoření!
-                </p>
+                <p><span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
+                ten obraz má už teď jizvy na rukou.<br>
+                Jizvy na rukou, rány od spasení,<br>
+                tak Bůh miloval svoje stvoření!</p>
             </div>
         </div>
     </section>
 
-    <section class="song-section" id="song2">
+    <section class="song-section" id="evangelium">
         <div class="sheet-music-container">
-            <img src="vitej.svg" alt="Noty" class="sheet-music-img">
+            <img src="slysme_slysme.svg" alt="Noty - Slyšme, slyšme" class="sheet-music-img">
         </div>
-        
         <div class="lyrics-container">
             <div class="lyrics-text">
-                <h2 class="song-title">2. Vítej, narozené Jezulátko</h2>
-                <hr class="divider-custom">
-                
-                <p class="chorus">
-                    <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
-                    vítej, Slovo Boží, pacholátko.
-                </p>
+                <div class="song-header">
+                    <span class="liturgical-tag">Před evangeliem</span>
+                    <h2 class="song-title">Slyšme, slyšme píseň</h2>
+                    <hr class="divider-custom">
+                </div>
 
-                <p>
-                    <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
-                    nás hříšné objevila?<br>
-                    Ztracené ve stínu, zlomené ve smrti,<br>
-                    Synu Boží, dík za tvé oběti!
-                </p>
-                
-                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+                <p><span class="verse-num">1.</span> Slyšme, slyšme píseň, jasná je a dobrotivá,<br>
+                slyšme, slyšme píseň, co nám anděl zpívá:<br>
+                „Bůh se zrodil, by svět vysvobodil!“<br>
+                A ta dobrá píseň hříchy světa smývá.</p>
 
-                <p>
-                    <span class="verse-num">2.</span> Bůh láskou nemocný, chápej, člověče,<br>
-                    roucho ti vybělí. Kdo však jej obleče?<br>
-                    Přichází hvězda tvá, zaklepe u dveří,<br>
-                    šťastný, kdo všimne si, otevře, uvěří.
-                </p>
+                <p><span class="verse-num">2.</span> Zpívejme tu píseň, Bůh nás volá do náručí,<br>
+                Zpívejme tu píseň, co nás anděl učí:<br>
+                „Bůh se zrodil, by svět vysvobodil!“<br>
+                Ať ta dobrá píseň celým světem zvučí!</p>
+                
+                <p><span class="verse-num">3.</span> Zpívejme tu píseň vroucně, z celé duše svojí,<br>
+                vždyť ta mocná píseň všechny rány hojí:<br>
+                „Bůh se zrodil, by svět vysvobodil!“<br>
+                Ať ta dobrá píseň srdce upokojí!</p>
             </div>
         </div>
     </section>
 
-    <section class="song-section" id="song3">
+    <section class="song-section" id="obetni">
         <div class="sheet-music-container">
-            <img src="vitej.svg" alt="Noty" class="sheet-music-img">
+            <img src="pujdem_spolu_do_betlema.svg" alt="Noty - Půjdem spolu" class="sheet-music-img">
         </div>
-        
         <div class="lyrics-container">
             <div class="lyrics-text">
-                <h2 class="song-title">3. Vítej, narozené Jezulátko</h2>
-                <hr class="divider-custom">
-                
-                <p class="chorus">
-                    <span class="verse-num">R:</span> Vítej, narozené Jezulátko,<br>
-                    vítej, Slovo Boží, pacholátko.
-                </p>
+                <div class="song-header">
+                    <span class="liturgical-tag">Obětní průvod</span>
+                    <h2 class="song-title">Půjdem spolu do Betléma</h2>
+                    <hr class="divider-custom">
+                </div>
 
-                <p>
-                    <span class="verse-num">1.</span> Jaká velikost, jaká síla<br>
-                    nás hříšné objevila?<br>
-                    Ztracené ve stínu, zlomené ve smrti,<br>
-                    Synu Boží, dík za tvé oběti!
-                </p>
+                <p><span class="verse-num">1.</span> Půjdem spolu do Betléma,<br>
+                dujdaj, dujdaj, dujdaj dá!<br>
+                <span class="verse-num">R:</span> Ježíšku, panáčku!<br>
+                Já tě budu kolíbati,<br>
+                Ježíšku, panáčku!<br>
+                Já tě budu kolíbat!</p>
+
+                <p><span class="verse-num">2.</span> Začni Kubo na ty dudy<br>
+                dujdaj, dujdaj, dujdaj dá!<br>
+                <span class="refrain-marker">R: Ježíšku, panáčku...</span></p>
+
+                <p><span class="verse-num">3.</span> A ty Janku na píštalku<br>
+                dudli, tudli, dudli dá!<br>
+                <span class="refrain-marker">R: Ježíšku, panáčku...</span></p>
+
+                <p><span class="verse-num">4.</span> A ty Mikši na housličky<br>
+                hudli, tydli, hudli dá!<br>
+                <span class="refrain-marker">R: Ježíšku, panáčku...</span></p>
+
+                <p><span class="verse-num">5.</span> A ty Vávro, na tu basu<br>
+                rum, rum, rum, rum, ruma dá!<br>
+                <span class="refrain-marker">R: Ježíšku, panáčku...</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="song-section" id="prijimani1">
+        <div class="sheet-music-container">
+            <img src="chtic_aby_spal.svg" alt="Noty - Chtíc aby spal" class="sheet-music-img">
+        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-text">
+                <div class="song-header">
+                    <span class="liturgical-tag">Přijímání</span>
+                    <h2 class="song-title">Chtíc, aby spal</h2>
+                    <hr class="divider-custom">
+                </div>
+
+                <p><span class="verse-num">1.</span> Chtíc, aby spal, tak zpívala Synáčkovi.<br>
+                Matka, jež ponocovala, miláčkovi.<br>
+                Nynej, rozkošné děťátko, synu Boží,<br>
+                nynej, nynej, nemluvňátko, světa zboží.</p>
+
+                <p><span class="verse-num">2.</span> Tobě jsem lůžko ustlala, Spasiteli,<br>
+                tvory k tvé chvále svolala, Stvořiteli.<br>
+                Nynej kráso a koruno svrchovaná,<br>
+                nynej milující ceno vinšovaná.</p>
+
+                <p><span class="verse-num">3.</span> Na dobrou noc ej hubička, nynej dítě,<br>
+                kolíbat bude matička, nynej hbitě.<br>
+                Spí miláček umlkněte, anjelové,<br>
+                se mnou k Bohu přiklekněte, národové.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="song-section" id="prijimani2">
+        <div class="sheet-music-container">
+            <img src="la_lu_la_lej.svg" alt="Noty - Lal lů la lej" class="sheet-music-img">
+        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-text">
+                <div class="song-header">
+                    <span class="liturgical-tag">Přijímání</span>
+                    <h2 class="song-title">Lal lů la lej</h2>
+                    <hr class="divider-custom">
+                </div>
+
+                <p><span class="verse-num">1.</span> Lal lů la lej, můj synáčku spi,<br>
+                baj baj, la lů la lej,<br>
+                la lej, už zavři očička svý<br>
+                baj baj, la lů la lej.</p>
+
+                <p><span class="verse-num">2.</span> Když Kristus se narodil, Herodes král,<br>
+                baj baj, la lů la lej,<br>
+                ten ukrutný tyran se o trůn svůj bál<br>
+                baj baj, la lů la lej.</p>
+
+                <p><span class="verse-num">3.</span> I rozkázal svým jest vojákům bdít,<br>
+                baj baj, la lů la lej,<br>
+                jít do domů rodičů synáčky vzít,<br>
+                baj baj, la lů la lej.</p>
+
+                <p><span class="verse-num">4.</span> Tu anděl řek: Josefe, synáčka vem,<br>
+                baj baj, la lů la lej,<br>
+                a s Marií uprchni v egyptskou zem,<br>
+                baj baj, la lů la lej.</p>
+
+                <p><span class="verse-num">5.</span> Už zemřeli kati i Herodes král,<br>
+                baj baj, la lů la lej,<br>
+                však děti si zpívají koledy dál,<br>
+                baj baj, la lů la lej.</p>
                 
-                <p class="refrain-marker"><span class="verse-num">R:</span> Vítej, narozené Jezulátko...</p>
+                <p><span class="verse-num">6.</span> <em>(= 1. sloka)</em></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="song-section" id="zaver">
+        <div class="sheet-music-container">
+            <img src="narodil_se.svg" alt="Noty - Narodil se" class="sheet-music-img">
+        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-text">
+                <div class="song-header">
+                    <span class="liturgical-tag">Úvod</span>
+                    <h2 class="song-title">Narodil se Kristus Pán</h2>
+                    <hr class="divider-custom">
+                </div>
                 
-                <p>
-                    <span class="verse-num">3.</span> V tichosti poklekám před svatou ikonou,<br>
-                    ten obraz má už teď jizvy na rukou.<br>
-                    Jizvy na rukou, rány od spasení,<br>
-                    tak Bůh miloval svoje stvoření!
-                </p>
+                <p><span class="verse-num">1.</span> Narodil se Kristus Pán, veselme se,<br>
+                z růže kvítek vykvet nám, radujme se.<br>
+                Z života čistého, z rodu královského,<br>
+                nám, nám, narodil se.</p>
+
+                <p><span class="verse-num">2.</span> Jenž prorokován jest, veselme se,<br>
+                ten na svět poslán jest, radujme se!<br>
+                Z života čistého, z rodu královského,<br>
+                nám, nám, narodil se.</p>
+                
+                <p><span class="verse-num">3.</span> Člověčenství naše, veselme se,<br>
+                ráčil vzíti na se, radujme se!<br>
+                Z života čistého, z rodu královského,<br>
+                nám, nám, narodil se.</p>
+
+                <p><span class="verse-num">4.</span> Goliáš obloupen, veselme se,<br>
+                člověk jest vykoupen, radujme se!<br>
+                Z života čistého, z rodu královského,<br>
+                nám, nám, narodil se.</p>
             </div>
         </div>
     </section>
