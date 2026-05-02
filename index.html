@@ -99,7 +99,12 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            /* Zde bylo max-height a overflow-y - smazáno pro volné roztáhnutí */
+        }
+
+        /* Třída přidávaná přes JS, pokud je prvek příliš vysoký */
+        .sheet-music-container.no-sticky {
+            position: relative !important;
+            top: auto !important;
         }
 
         .sheet-music-img {
@@ -234,7 +239,7 @@
     <!-- PŘED EVANGELIEM -->
     <section class="song-section" id="predevangelium">
         <div class="sheet-music-container">
-            <img src="alleluia.svg" alt="Noty - Aleluja" class="sheet-music-img">
+            <img src="aleluja.svg" alt="Noty - Aleluja" class="sheet-music-img">
         </div>
         <div class="lyrics-container">
             <div class="lyrics-text">
@@ -327,7 +332,28 @@
                     <h2 class="song-title">Milujeme, ač nevidíme</h2>
                     <hr class="divider-custom">
                 </div>
+            
+
+            <p><span class="verse-num">1.</span> Milujeme, ač nevidíme,<br>
+            věříme v něj a jásáme<br>
+            nevýslovnou radostí plnou slávy,<br>
+            v něm docházíme cíle víry své.<br>
+            </p>
+
+            <p><span class="verse-num">2.</span> Zlatem a stříbrem on nezaplatil,<br>
+            pomíjivým nás nekoupil,<br>
+            povolal nás do světla svého,<br>
+            skrze něj máme přístup do bran nebeských.<br>
+            </p>
+
+            <p><span class="verse-num">R:</span> Jsme koupeni krví Beránka<br>
+            na místě, zvaném Golgota,<br>
+            otroky hříchu nemusíme déle být.<br>
+            Na kříži svůj život dokonal,<br>
+            třetího dne však z mrtvých vstal,<br>
+            otroky hříchu nemusíme déle být.</p>
             </div>
+
         </div>
     </section>
 
@@ -399,6 +425,24 @@
                 themeIcon.classList.add('bi-moon-fill');
             }
         }
+
+        // Dynamická kontrola výšky not pro vypnutí sticky efektu, když jsou moc dlouhé
+        function adjustStickyBehavior() {
+            const containers = document.querySelectorAll('.sheet-music-container');
+            const viewportHeight = window.innerHeight;
+
+            containers.forEach(container => {
+                if (container.offsetHeight > viewportHeight) {
+                    container.classList.add('no-sticky');
+                } else {
+                    container.classList.remove('no-sticky');
+                }
+            });
+        }
+
+        // Spustit při načtení a při každé změně velikosti okna
+        window.addEventListener('load', adjustStickyBehavior);
+        window.addEventListener('resize', adjustStickyBehavior);
     </script>
 </body>
 </html>
