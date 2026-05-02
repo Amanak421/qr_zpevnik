@@ -95,12 +95,17 @@
             z-index: 10;
             box-shadow: 0 4px 6px -2px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            /* Zde bylo max-height a overflow-y - smazáno pro volné roztáhnutí */
         }
 
         .sheet-music-img {
-            max-height: 60vh;
-            width: auto; 
-            max-width: 100%; 
+            width: 100%; 
+            max-width: 600px; 
+            height: auto; 
             object-fit: contain;
             filter: var(--filter-sheet); 
             transition: filter 0.3s;
@@ -121,7 +126,7 @@
                 padding-bottom: 0;
             }
             .sheet-music-img {
-                max-height: none; width: 100%; max-width: 900px; margin-top: 10px;
+                width: 100%; max-width: 900px; margin-top: 10px;
             }
             .lyrics-container { padding-top: 10px; }
         }
@@ -177,34 +182,56 @@
         <i class="bi bi-moon-fill" id="theme-icon"></i>
     </button>
 
+    <!-- VSTUP -->
     <section class="song-section" id="vstup">
         <div class="sheet-music-container">
-            <img src="kde_se_krestane.svg" alt="Noty - Kde se křesťané" class="sheet-music-img">
+            <img src="pulmetrovej_zazrak.svg" alt="Noty - Půlmetrovej zázrak" class="sheet-music-img">
         </div>
         <div class="lyrics-container">
             <div class="lyrics-text">
                 <div class="song-header">
                     <span class="liturgical-tag">Vstup</span>
-                    <h2 class="song-title">Kde se křesťané</h2>
+                    <h2 class="song-title">Půlmetrovej zázrak</h2>
                     <hr class="divider-custom">
                 </div>
                 
-                <p><span class="verse-num">1.</span> Kde se křesťané spolu scházejí,<br>
-                ve jménu Tvém,<br>
-                v lásce jednotní.<br>
-                Právě tam jsi zaslíbil,<br>
-                že budeš přítomný.<br>
-                Dnes víme, náš Bůh je<br>
-                na tomto místě přítomný.</p>
+                <p><span class="verse-num">1.</span> Půlmetrovej zázrak, kterej v Božím plánu,<br>
+                kterej v Božím plánu od počátku byl,<br>
+                otevírá právě do života bránu<br>
+                klíčem, co nám Kristus krví posvětil.</p>
 
-                <p class="chorus"><span class="verse-num">R:</span> |: Přivítejme Pána v tomto chrámě,<br>
-                ať ho Boží sláva naplní,<br>
-                svému Bohu zpívejme a hrajme,<br>
-                píseň spasených. :|</p>
+                <p class="chorus"><span class="verse-num">R:</span> V pastýřově velkém zachráněném stádě<br>
+                za okamžik bude víc o jedno mládě,<br>
+                víc o jedno mládě zachumlané v peřinkách.<br>
+                V pastýřově stádě rozezní se díky<br>
+                Bohu, že z nás stvořil svoje společníky,<br>
+                překročme teď znovu spolu s malou onen práh.</p>
+
+                <p><span class="verse-num">2.</span> Tak jako v sadě všechny stromy rozpraskané suchem,<br>
+                díky kapkám deště můžou znovu plody nést,<br>
+                tak i každý člověk oživený duchem,<br>
+                tak i každý člověk, který přijal křest.</p>
+
+                <p class="refrain-marker">R: V pastýřově velkém...</p>
+
+                <p><span class="verse-num">3.</span> Dnes dobrý Bůh si poznamená v nebi další jméno<br>
+                do seznamu lidí znovuzrozených<br>
+                a náš malý capart milost jako věno<br>
+                dostane od Pána, smazán bude hřích.</p>
+
+                <p class="refrain-marker">R: V pastýřově velkém...</p>
+
+                <p><span class="verse-num">4.</span> Tak asi půlmetrovej zázrak, kterej v Božím plánu,<br>
+                kterej v Božím plánu od počátku byl,<br>
+                otevírá právě do života bránu<br>
+                klíčem, co nám Kristus krví posvětil.</p>
+
+                <p class="refrain-marker">R: V pastýřově velkém...</p>
             </div>
         </div>
     </section>
 
+    <!-- PŘED EVANGELIEM -->
     <section class="song-section" id="predevangelium">
         <div class="sheet-music-container">
             <img src="alleluia.svg" alt="Noty - Aleluja" class="sheet-music-img">
@@ -220,106 +247,136 @@
         </div>
     </section>
 
-    <section class="song-section" id="obetovani">
+    <!-- OBĚTNÍ PRŮVOD 1 -->
+    <section class="song-section" id="obetovani-1">
         <div class="sheet-music-container">
-            <img src="zpivej_haleluja.svg" alt="Noty - Zpívej haleluja" class="sheet-music-img">
+            <img src="sly_zrana_ke_hrobu.svg" alt="Noty - Šly zrána ke hrobu" class="sheet-music-img">
         </div>
         <div class="lyrics-container">
             <div class="lyrics-text">
                 <div class="song-header">
                     <span class="liturgical-tag">Obětní průvod</span>
-                    <h2 class="song-title">Zpívej haleluja</h2>
+                    <h2 class="song-title">Šly zrána ke hrobu</h2>
                     <hr class="divider-custom">
                 </div>
 
-                <p><span class="verse-num">1.</span> Zpívej haleluja, zpívej haleluja,<br>
-                zpívej, spasení mé je Ježíš.<br>
-                Koupil mne svojí Krví, drahou nevinnou Krví,<br>
-                koupil mne svojí Krví Ježíš, Ježíš.<br>
-                Amen.</p>
+                <p><span class="verse-num">1.</span> Šly zrána ke hrobu Marie Magdalena<br>
+                a matka Jakuba a ještě jedna žena<br>
+                sobě pro útěchu, mrtvému na památku,<br>
+                šly zrána ke hrobu, dva dny po Velkém pátku.</p>
 
-                <p><span class="verse-num">2.</span> Jásej haleluja, jásej haleluja,<br>
-                jásej, smíření dal mi Ježíš.<br>
-                Zmíral za moje viny, on sám tolik nevinný,<br>
-                zmíral za moje viny Ježíš, Ježíš.<br>
-                Amen.</p>
+                <p><span class="verse-num">2.</span> Šly zrána ke hrobu, sotva se rozednilo,<br>
+                oživit vzpomínku, pomazat mrtvé tělo,<br>
+                balzámem zpomalit zánik a zapomnění,<br>
+                na chvíli podržet, co bylo a co není.</p>
 
-                <p><span class="verse-num">3.</span> Tančím haleluja, tančím haleluja,<br>
-                tančím, vzkříšení dal mi Ježíš.<br>
-                Přijde, on mi to slíbil, přijde - vždyť mi to slíbil,<br>
-                přijde s mocí a slávou Ježíš, Ježíš.<br>
-                Amen.</p>
+                <p><span class="verse-num">3.</span> Šly zrána ke hrobu a hrob byl otevřený,<br>
+                tak dovnitř vstoupily zmíněné již tři ženy,<br>
+                kampak se poděl ten, za nejž šly držet smutek?<br>
+                Chtěly mu prokázat poslední dobrý skutek.</p>
 
-                <p><span class="verse-num">4.</span> Hrajte na harfu, loutnu, hrajte na buben, flétnu,<br>
-                hrajte k oslavě jména Ježíš.<br>
-                Hrajte na housle, píšťalu, hrajte na cimbál, kytaru,<br>
-                hrajte, vítězem stal se Ježíš, Ježíš.<br>
-                Amen.</p>
+                <p><span class="verse-num">4.</span> A když si říkaly, že to snad není k víře,<br>
+                bázeň na ně padla jak kdysi na pastýře.<br>
+                Dva muži stáli tu, šat sněhobílý měli<br>
+                a světlo svítilo, až oči přecházely.</p>
+
+                <p><span class="verse-num">5.</span> Tu ženy poklekly, sklonily tváře k zemi<br>
+                a muži řekli jim: "Zbytečně mezi těmi,<br>
+                co v prach se navrací, hledáte Pána svého,<br>
+                hroby jsou pro mrtvé, ale ne pro živého."</p>
+
+                <p><span class="verse-num">6.</span> Vzpomeňte, co slíbil váš Mistr Ježíš živý,<br>
+                a znovu čekejte veliké Boží divy.<br>
+                K čemu jsou balzámy, hroby a mauzolea,<br>
+                když je teď před vámi svátek vzkříšení těla.</p>
             </div>
         </div>
     </section>
 
-    <section class="song-section" id="prijimani">
+    <!-- OBĚTNÍ PRŮVOD 2 -->
+    <section class="song-section" id="obetovani-2">
         <div class="sheet-music-container">
-            <img src="buh_je_tak_blizko_nas.svg" alt="Noty - Bůh je tak blízko nás" class="sheet-music-img">
+            <img src="stante_se_soli_zeme.svg" alt="Noty - Staňte se solí" class="sheet-music-img">
         </div>
         <div class="lyrics-container">
             <div class="lyrics-text">
                 <div class="song-header">
-                    <span class="liturgical-tag">Svaté přijímání</span>
-                    <h2 class="song-title">Bůh je tak blízko nás</h2>
+                    <span class="liturgical-tag">Obětní průvod</span>
+                    <h2 class="song-title">Staňte se solí</h2>
                     <hr class="divider-custom">
                 </div>
 
-                <p><span class="verse-num">1.</span> Bůh je tak blízko nás,<br>
-                Bůh je tak blízko nás,<br>
-                Bůh je tak blízko nás,<br>
-                Bůh je v nás.</p>
-
-                <p class="chorus"><span class="verse-num">R:</span> Ty jsi ten dar od Otce dán,<br>
-                Ty jsi ta láska, co přišla k nám,<br>
-                Ty jsi nás z hříchu vykoupit<br>
-                chtěl, Immanuel.</p>
+                <p>Staňte se solí, solí země<br>
+                a hledejte poklad víry.<br>
+                Buďte světlem, světlem světa,<br>
+                které do tmy svítí.</p>
             </div>
         </div>
     </section>
 
+    <!-- SVATÉ PŘIJÍMÁNÍ -->
+    <section class="song-section" id="prijimani">
+        <div class="sheet-music-container">
+            <img src="milujeme_ac_nevidime-1.svg" alt="Noty - Milujeme, ač nevidíme 1" class="sheet-music-img">
+            <img src="milujeme_ac_nevidime-2.svg" alt="Noty - Milujeme, ač nevidíme 2" class="sheet-music-img">
+        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-text">
+                <div class="song-header">
+                    <span class="liturgical-tag">Přijímání</span>
+                    <h2 class="song-title">Milujeme, ač nevidíme</h2>
+                    <hr class="divider-custom">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ZÁVĚR -->
     <section class="song-section" id="zaver">
         <div class="sheet-music-container">
-            <img src="volam_haleluja.svg" alt="Noty - Volám haleluja" class="sheet-music-img">
+            <img src="chvalte_pana.svg" alt="Noty - Chvalte Pána" class="sheet-music-img">
         </div>
         <div class="lyrics-container">
             <div class="lyrics-text">
                 <div class="song-header">
                     <span class="liturgical-tag">Závěr</span>
-                    <h2 class="song-title">Volám haleluja</h2>
+                    <h2 class="song-title">Chvalte Pána</h2>
                     <hr class="divider-custom">
                 </div>
 
-                <p><span class="verse-num">1.</span> Dlouho již hřích tvým lidem zmítal,<br>
-                Dlouho již smrt přinášel,<br>
-                než Tvůj hlas nás do království vítal,<br>
-                než nám brány otevřel,<br>
-                než nám brány otevřel.</p>
+                <p class="chorus"><span class="verse-num">R:</span> Chvalte Pána, chvalte Pána,<br>
+                chvalte Pána stále,<br>
+                spoutaným on pouta rozvázal,<br>
+                chvalte Pána, chvalte Pána,<br>
+                chvalte Pána stále,<br>
+                mezi králi nejvyšší je král.</p>
 
-                <p class="chorus"><span class="verse-num">R:</span> Volám haleluja, slyším haleluja,<br>
-                volám haleluja, haleluja, haleluja.</p>
-
-                <p><span class="verse-num">2.</span> Dlouho již lid zraňoval Tvou lásku,<br>
-                dlouho již nenáviděl,<br>
-                život svůj tak snadno dával v sázku,<br>
-                nářek dětí neslyšel,<br>
-                nářek dětí neslyšel,</p>
+                <p><span class="verse-num">1.</span> Ve všech domech ať ho chválí,<br>
+                ať mu zpívá každej dům,<br>
+                uvolněte místo zvučným cimbálům,<br>
+                jedni chvalte harfou, jedni flétnou, kytarou,<br>
+                do rytmu ať všechny bubny pěkně jdou,<br>
+                pěkně jdou, pěkně jdou.</p>
                 
-                <p class="refrain-marker">R: Volám haleluja...</p>
+                <p class="refrain-marker">R: Chvalte Pána...</p>
 
-                <p><span class="verse-num">3.</span> Dlouho již v beznaději lid se ztrácel,<br>
-                dlouho již Tě odmítal,<br>
-                přišel čas, aby k Tobě se zas vracel,<br>
-                dík svému Tvůrci aby vzdal,<br>
-                dík svému Tvůrci aby vzdal.</p>
+                <p><span class="verse-num">2.</span> Vždyť on stvořil jasné nebe,<br>
+                stvořil malou, dobrou Zem,<br>
+                taky modrý moře se vším, co je v něm.<br>
+                Slunci dodal světlo, vypočítal cesty hvězd,<br>
+                člověk, co ho zklamal, dostal od něj křest,<br>
+                od něj křest, od něj křest.</p>
                 
-                <p class="refrain-marker">R: Volám haleluja...</p>
+                <p class="refrain-marker">R: Chvalte Pána...</p>
+
+                <p><span class="verse-num">3.</span> Ať ho duší, tělem každý chválí<br>
+                den ode dne víc,<br>
+                mladí nebo staří pěkně z plných plic.<br>
+                Ukázal nám cestu, stejně ukázal nám cíl,<br>
+                zvítězil nad křížem, kámen odvalil,<br>
+                odvalil, odvalil.</p>
+                
+                <p class="refrain-marker">R: Chvalte Pána...</p>
             </div>
         </div>
     </section>
